@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
 import { Get } from "../dbFetch";
 import { Delete } from "../dbFetch";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const ExpenseContext = createContext();
 
 function ExpenseProvider(props) {
@@ -11,7 +14,7 @@ function ExpenseProvider(props) {
   const [totalAmount, setTotalAmount] = useState(30500);
   const [expenseAmount, setExpenseAmount] = useState(500);
   const [investAmount, setInvestAmount] = useState(10000);
-
+  const [showDialog, setShowDialog] = useState(false);
   //when the server load frist it get initialised
   useEffect(() => {
     const fetchData = async () => {
@@ -20,12 +23,11 @@ function ExpenseProvider(props) {
         const response = await Get(`/api/expense/detail/${userId}`);
         setExpenses(response.expenses);
       } catch (error) {
-        console.log(error);
+        toast.error("Error in loading..");
       }
     };
     fetchData();
   }, []);
-
 
   const addExpense = (newExpense) => {
     setExpenses([...expenses, newExpense]);
@@ -33,22 +35,16 @@ function ExpenseProvider(props) {
 
   //remove the the expense
   const removeExpense = async (index) => {
-    //deleting the expense 
-    const res = await Delete(`/api/expense/delete/${index}`);
-    const userId = localStorage.getItem("user");
-    //if deleted then go for the again loading of the expense
-    if (res.success) {
-      try {
-        const response = await Get(`/api/expense/detail/${userId}`);
-        const updatedExpenses = response.expenses.filter(
-          (expense, i) => i !== index
-        );
-        setExpenses(updatedExpenses);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      console.error("Error deleting expense");
+    try {
+      //deleting the expense
+      await Delete(`/api/expense/delete/${index}`);
+      //handle this in state locally
+      const updatedExpenses = [...expenses];
+      updatedExpenses.splice(index, 1);
+      setExpenses(updatedExpenses);
+      toast.success("Deleted successfully");
+    } catch (error) {
+      toast.error("Error in deleting..");
     }
   };
 
@@ -69,6 +65,8 @@ function ExpenseProvider(props) {
         removeExpense,
         login,
         setLogin,
+        showDialog,
+        setShowDialog,
       }}
     >
       {props.children}

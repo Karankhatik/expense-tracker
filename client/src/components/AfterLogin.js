@@ -23,8 +23,8 @@ import "react-toastify/dist/ReactToastify.css";
 export const AfterLogin = () => {
   //intialize the navigate hook
   const navigate = useNavigate();
-  const [showDialog, setShowDialog] = React.useState(false);
-  const { setLogin } = useContext(ExpenseContext);
+    
+  const { setLogin,setShowDialog, showDialog } = useContext(ExpenseContext);
   //For the sign-up Dialog handle
   const openDialog = () => {
     setShowDialog(true);

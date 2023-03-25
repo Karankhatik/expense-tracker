@@ -16,7 +16,7 @@ const ExpenseForm = () => {
   
 
   //get the data from context api
-  const { addExpense } = useContext(ExpenseContext);
+  const { addExpense, setShowDialog } = useContext(ExpenseContext);
 
   const formik = useFormik({
     //intial value to the the expense form
@@ -47,7 +47,9 @@ const ExpenseForm = () => {
     const dataWithUserId = { ...data, userId };
     const response = await Fetch(path, dataWithUserId);
     if (response.success) {
+      setShowDialog(false);
       toast.success("Expense Added")
+      
     } else {
       toast.error("something went wrong")
     }

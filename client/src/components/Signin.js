@@ -29,7 +29,7 @@ const btnstyle = { margin: "8px 0" };
 const Signin = () => {
 
   //getting the login state from the context
-  const { setLogin} = useContext(ExpenseContext);
+  const { setLogin, } = useContext(ExpenseContext);
 
   const navigate = useNavigate();
 
