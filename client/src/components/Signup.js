@@ -12,6 +12,8 @@ import * as yup from "yup";
 import { AddCircleOutlineOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Fetch } from "../dbFetch";
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const paperStyle = {
   padding: 20,
@@ -56,12 +58,13 @@ const Signup = () => {
     const path = "/api/user/create";
     delete data.initialValues;
     const response = await Fetch(path, data);
-    if (response.success) {
-      console.log(response);
+    if (response.success) {      
       localStorage.setItem("user", response.user._id);
       localStorage.setItem("token", response.user._id);
+      toast.success("Signup successfull");
       navigate("/user-logged");
     } else {
+      toast.info("User Already present");
     }
   }
 

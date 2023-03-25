@@ -8,11 +8,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Fetch } from "../dbFetch";
-import { useNavigate } from "react-router-dom";
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 const ExpenseForm = () => {
   //intialize navigate hook
-  const navigate = useNavigate();
+  
 
   //get the data from context api
   const { addExpense } = useContext(ExpenseContext);
@@ -46,9 +47,9 @@ const ExpenseForm = () => {
     const dataWithUserId = { ...data, userId };
     const response = await Fetch(path, dataWithUserId);
     if (response.success) {
-      console.log("Success");
+      toast.success("Expense Added")
     } else {
-      console.log("Error");
+      toast.error("something went wrong")
     }
   }
 

@@ -15,6 +15,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useContext } from "react";
 import { ExpenseContext } from "../context/ExpenseContext";
 import { useNavigate } from "react-router-dom";
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const LandingPage = () => {
   //intialize the naviagte hook
@@ -29,6 +31,7 @@ export const LandingPage = () => {
   //For the sign-up Dialog handle
   const openDialog = () => {
     if (login === true) {
+      toast.info("Already logged in");
       navigate("/user-logged");
     }
     setShowDialogSignup(true);
@@ -40,6 +43,7 @@ export const LandingPage = () => {
   //For the sign-in Dialog handle
   const openDialogLogin = () => {
     if (login === true) {
+      toast.info("Already logged in");
       navigate("/user-logged");
     }
     setShowDialogLogin(true);

@@ -22,25 +22,12 @@ const Graph = () => {
       },
     ],
   };
-  //Options for the chart
-  const options = {
-    plugins: {
-      legend: {
-        display: false,
-      },
-      datalabels: {
-        color: 'white',
-        formatter: (value, context) => {
-          return context.chart.data.labels[context.dataIndex];
-        },
-      },
-    },
-  };
+  
 
   
   return (
     <>
-    <Doughnut data={data} options={options}/>
+    <Doughnut data={data} />
     {/* //Describing  the donut chart and their color and als show total amount   */}
     <Paper elevation={3} style={{ padding: "16px", margin: "16px", backgroundColor: "#fff", boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)" }}>
       <Grid container justify="space-between" alignItems="center">

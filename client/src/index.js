@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <>
     <App />
     <ToastContainer
       position="top-right"
@@ -20,6 +21,7 @@ root.render(
       pauseOnHover
       theme="colored"
     />
+    </>
   </React.StrictMode>
 );
 

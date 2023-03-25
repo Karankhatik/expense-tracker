@@ -16,14 +16,15 @@ import { ShowExpenses } from "./ShowExpenses";
 import { ExpenseContext } from "../context/ExpenseContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export const AfterLogin = () => {
   //intialize the navigate hook
   const navigate = useNavigate();
   const [showDialog, setShowDialog] = React.useState(false);
-  const { login, setLogin } = useContext(ExpenseContext);
+  const { setLogin } = useContext(ExpenseContext);
   //For the sign-up Dialog handle
   const openDialog = () => {
     setShowDialog(true);
@@ -34,6 +35,7 @@ export const AfterLogin = () => {
   function handleLogout() {
     localStorage.removeItem("user");
     setLogin(false);
+    toast.success('Logout successfull')
     navigate("/");
   }
   return (

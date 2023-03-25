@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import {
   Grid,
   Paper,
   Avatar,
   TextField,
   Button,
-  Typography,
+  
 } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
 import { useFormik } from "formik";
@@ -15,6 +15,8 @@ import { useNavigate} from "react-router-dom";
 import { Fetch } from "../dbFetch";
 import { useContext } from "react";
 import { ExpenseContext } from "../context/ExpenseContext";
+import {  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const paperStyle = {
   padding: 20,
@@ -27,7 +29,7 @@ const btnstyle = { margin: "8px 0" };
 const Signin = () => {
 
   //getting the login state from the context
-  const {login, setLogin} = useContext(ExpenseContext);
+  const { setLogin} = useContext(ExpenseContext);
 
   const navigate = useNavigate();
 
@@ -56,9 +58,11 @@ const Signin = () => {
       localStorage.setItem('user', response.user._id);
       localStorage.setItem('token', response.jwtToken); 
       setLogin(true);
+      toast.success("Login Successull")
       navigate("/user-logged");
     } else {
-      
+      toast.error("wrong credential");
+
     }
   }
 
