@@ -7,8 +7,7 @@ module.exports.verifyToken = function(req, res, next){
         jwt.verify(token, jwtKey, (err,valid) => {
             if(err){
                 res.status(500).json({ message: 'Server error' });
-            }
-            //  res.json({ success: true, message: "User Authenticated"});
+            }            
              next();
         })
     }
