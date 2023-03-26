@@ -59,8 +59,8 @@ const Signup = () => {
     delete data.initialValues;
     const response = await Fetch(path, data);
     if (response.success) {      
-      localStorage.setItem("user", response.user._id);
-      localStorage.setItem("token", response.user._id);
+      localStorage.setItem("user", response.newUser._id);
+      localStorage.setItem("token", response.jwtToken);
       toast.success("Signup successfull");
       navigate("/user-logged");
     } else {

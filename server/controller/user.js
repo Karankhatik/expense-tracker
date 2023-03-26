@@ -34,8 +34,11 @@ module.exports.createUser = async function (req, res) {
 // checking the sign in data and sending the response
 module.exports.signIn = async function (req, res) {
   try {
-    const user = await User.findOne({ email: req.body.data.email , password: req.body.data.password});
-    //if user is in the based than only login 
+    const user = await User.findOne({
+      email: req.body.data.email,
+      password: req.body.data.password,
+    });
+    //if user is in the based than only login
     if (user) {
       const jwtToken = jwt.sign({ id: user._id }, jwtKey, {
         expiresIn: "2 days",

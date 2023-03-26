@@ -71,18 +71,20 @@ function ExpenseProvider(props) {
   const removeExpense = async (title) => {
     try {
       //deleting the expense      
-      await Delete(`/api/expense/delete/${title}`);
+      const res = await Delete(`/api/expense/delete/${title}`);
       
         //handle this in state locally
-      const updatedExpenses = [...expenses];
-      updatedExpenses.splice(title, 1);
-      setExpenses(updatedExpenses);
-      //change the state after deleting
-      const indexOfExpense = expenses.findIndex((expense) => expense.title === title);
-      const deletedExpense = expenses[indexOfExpense];
-      changeStateOfExpenseAfterDelete(deletedExpense);
-      //showing toaster after successfully deleted
-       toast.success("Deleted successfully");          
+        if(res.success){
+          const updatedExpenses = [...expenses];
+          updatedExpenses.splice(title, 1);
+          setExpenses(updatedExpenses);
+          //change the state after deleting
+          const indexOfExpense = expenses.findIndex((expense) => expense.title === title);
+          const deletedExpense = expenses[indexOfExpense];
+          changeStateOfExpenseAfterDelete(deletedExpense);
+          //showing toaster after successfully deleted
+           toast.success("Deleted successfully"); 
+        }         
     } catch (error) {
       toast.error("Error in deleting..");
     }
