@@ -8,15 +8,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Fetch } from "../dbFetch";
-import {  toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ExpenseForm = () => {
   //intialize navigate hook
-  
 
   //get the data from context api
-  const { addExpense, setShowDialog } = useContext(ExpenseContext);
+  const { addExpense, setShowDialog} = useContext(ExpenseContext);
 
   const formik = useFormik({
     //intial value to the the expense form
@@ -34,11 +33,12 @@ const ExpenseForm = () => {
       amount: yup.string().required("required"),
     }),
     //All the value of form come here after submitting
-    onSubmit: (values) => {
-      addExpense(values);
+    onSubmit: (values) => {     
       createExpenseApi(values);
     },
   });
+
+  
 
   //create expense api fetching
   async function createExpenseApi(data) {
@@ -47,11 +47,11 @@ const ExpenseForm = () => {
     const dataWithUserId = { ...data, userId };
     const response = await Fetch(path, dataWithUserId);
     if (response.success) {
+      addExpense(data);
       setShowDialog(false);
-      toast.success("Expense Added")
-      
+      toast.success("Expense Added");
     } else {
-      toast.error("something went wrong")
+      toast.info("Please enter different title as this title is alreay present");
     }
   }
 
@@ -85,7 +85,7 @@ const ExpenseForm = () => {
             <Grid item xs={12}>
               {/* Title */}
               <TextField
-                label="Sallary, House, Rent"
+                label="title"
                 type="text"
                 fullWidth
                 name="title"

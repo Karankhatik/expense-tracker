@@ -22,6 +22,14 @@ const Graph = () => {
       },
     ],
   };
+
+  function getPositiveNumber(num) {
+    if (isNaN(num) || num < 0) {
+      return 0;
+    }else{
+      return num;
+    }
+  }
   
 
   
@@ -34,15 +42,15 @@ const Graph = () => {
         <Grid item>
           <Typography>
             <Crop169Icon style={{ marginRight: "8px", color: "#3be84a", backgroundColor:'#3be84a' }} />
-            Saving Amount 
+            Saving Amount {getPositiveNumber((savingAmount*100/totalAmount).toFixed(0)) }%
           </Typography>
           <Typography>
             <Crop169Icon style={{ marginRight: "8px" ,color: "#e6f540", backgroundColor:'#e6f540' }} />
-            Invest Amount 
+            Invest Amount {getPositiveNumber((investAmount*100/totalAmount).toFixed(0)) }% 
           </Typography>
           <Typography>
             <Crop169Icon style={{ marginRight: "8px", color: "#f54045" , backgroundColor:'#f54045'}} />
-            Expense Amount 
+            Expense Amount  {getPositiveNumber((expenseAmount*100/totalAmount).toFixed(0)) }%
           </Typography>
         </Grid>
         <Grid item xs={6} container justifyContent="flex-end">

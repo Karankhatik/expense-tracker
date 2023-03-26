@@ -23,7 +23,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const AfterLogin = () => {
   //intialize the navigate hook
   const navigate = useNavigate();
-    
+
   const { setLogin,setShowDialog, showDialog } = useContext(ExpenseContext);
   //For the sign-up Dialog handle
   const openDialog = () => {
@@ -34,6 +34,7 @@ export const AfterLogin = () => {
   };
   function handleLogout() {
     localStorage.removeItem("user");
+    localStorage.removeItem('token');
     setLogin(false);
     toast.success('Logout successfull')
     navigate("/");
@@ -67,7 +68,7 @@ export const AfterLogin = () => {
           <Graph />
         </Grid>
         {/* form */}
-        <Grid item lg={5} md={8}>
+        <Grid item lg={6} md={8}>
           {/* Login Button  */}
           <Typography>
             Click here to add expense <Button onClick={openDialog}>Add</Button>

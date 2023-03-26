@@ -7,6 +7,7 @@ import {
   DialogActions,
   AppBar,
   Toolbar,
+  Grid
 } from "@mui/material";
 import Signup from "./Signup";
 import { Link } from "react-router-dom";
@@ -17,6 +18,7 @@ import { ExpenseContext } from "../context/ExpenseContext";
 import { useNavigate } from "react-router-dom";
 import {  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 export const LandingPage = () => {
   //intialize the naviagte hook
@@ -113,6 +115,9 @@ export const LandingPage = () => {
           </DialogActions>
         </Dialog>
       </Typography>
+      <Grid>
+       
+      </Grid>
     </>
   );
 };

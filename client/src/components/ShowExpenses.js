@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ExpenseContext } from "../context/ExpenseContext";
 import {
   Table,
@@ -56,7 +56,7 @@ export const ShowExpenses = () => {
               <TableCell>{expense.category}</TableCell>
               <TableCell>{expense.detail}</TableCell>
               <TableCell>
-                <Button onClick={() => removeExpense(expense._id)}>
+                <Button onClick={() => removeExpense(expense.title)}>
                   <DeleteIcon></DeleteIcon>
                 </Button>
               </TableCell>

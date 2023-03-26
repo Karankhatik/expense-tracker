@@ -6,6 +6,6 @@ const expenseController = require('../controller/expense');
 //api of expense 
 router.post('/create', expenseController.create);
 router.get('/detail/:id',expenseController.showdata);
-router.get('/delete/:id',expenseController.destroy);
+router.get('/delete/:title',expenseController.destroy);
 
 module.exports = router;
