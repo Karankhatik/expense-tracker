@@ -1,5 +1,5 @@
 # expense-tracker
-For Stating the Project 
+For Starting the Project 
 cd client - npm install
 cd server - npm install
 
